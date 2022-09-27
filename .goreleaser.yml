@@ -1,0 +1,36 @@
+builds:
+- id: sak
+  main: cmd/sak/main.go
+  binary: sak
+  flags:
+  - -trimpath
+  ldflags:
+  - -X github.com/iwaltgen/sak/internal.version={{.Env.VERSION}}
+  - -X github.com/iwaltgen/sak/internal.commitHash={{.Env.GITHUB_SHA}}
+  - -X github.com/iwaltgen/sak/internal.buildDate={{.Env.BUILD_TIME}}
+  env:
+  - CGO_ENABLED=0
+  goos:
+  - linux
+  - darwin
+  - windows
+  goarch:
+  - amd64
+  - arm64
+  hooks:
+    post:
+    - upx "{{ .Path }}"
+
+archives:
+- id: release
+  builds:
+  - sak
+  format_overrides:
+  - goos: windows
+    format: zip
+
+changelog:
+  skip: false
+  filters:
+    exclude:
+    - 'chore: bump version'
