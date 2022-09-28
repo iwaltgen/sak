@@ -52,9 +52,11 @@ func run(ctx *cli.Context) error {
 	switch {
 	case ctx.Bool("hex"):
 		random = rand.NewHexWithLength(length)
+
 	case ctx.Bool("base32"):
 		random = rand.NewBase32WithLength(length)
-	case ctx.Bool("base64"):
+
+	default:
 		random = rand.NewBase64WithLength(length)
 	}
 
