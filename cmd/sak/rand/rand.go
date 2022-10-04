@@ -2,7 +2,6 @@ package rand
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/urfave/cli/v2"
 
@@ -60,7 +59,7 @@ func run(ctx *cli.Context) error {
 		random = rand.NewBase64WithLength(length)
 	}
 
-	fmt.Fprint(os.Stdout, random)
-	fmt.Fprintln(os.Stderr)
+	fmt.Fprint(ctx.App.Writer, random)
+	fmt.Fprintln(ctx.App.ErrWriter)
 	return nil
 }
