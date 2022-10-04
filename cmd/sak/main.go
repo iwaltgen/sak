@@ -6,6 +6,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
+	"github.com/iwaltgen/sak/cmd/sak/len"
 	"github.com/iwaltgen/sak/cmd/sak/rand"
 	"github.com/iwaltgen/sak/internal"
 )
@@ -33,6 +34,7 @@ func main() {
 		},
 		Commands: []*cli.Command{
 			rand.Cmd,
+			len.Cmd,
 		},
 	}
 
