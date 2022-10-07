@@ -20,7 +20,7 @@ func init() {
 			&cli.IntFlag{
 				Name:    "length",
 				Aliases: []string{"l"},
-				Value:   32,
+				Value:   16,
 				Usage:   "length of random bytes",
 			},
 			&cli.BoolFlag{

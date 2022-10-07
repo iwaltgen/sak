@@ -8,7 +8,7 @@ import (
 	"io"
 )
 
-const defaultLength = 32
+const defaultLength = 16
 
 var defaultRander = rand.Reader
 
