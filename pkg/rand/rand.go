@@ -6,6 +6,9 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"io"
+
+	"github.com/oklog/ulid/v2"
+	"github.com/segmentio/ksuid"
 )
 
 const defaultLength = 16
@@ -30,6 +33,18 @@ func NewBase32() string {
 // NewHex creates a new random []byte and returns it as a hex string or panics.
 func NewHex() string {
 	return hex.EncodeToString(must(NewRandom()))
+}
+
+// NewKSUID creates a new random []byte and returns it as a KSUID string or panics.
+// https://github.com/segmentio/ksuid
+func NewKSUID() string {
+	return ksuid.New().String()
+}
+
+// NewULID creates a new random []byte and returns it as a ULID string or panics.
+// https://github.com/oklog/ulid
+func NewULID() string {
+	return ulid.Make().String()
 }
 
 // NewRandom returns a random []byte.
