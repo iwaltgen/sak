@@ -6,94 +6,79 @@
 package rand
 
 import (
-	"crypto/rand"
 	"encoding/base32"
 	"encoding/base64"
 	"encoding/hex"
-	"io"
 
-	"github.com/oklog/ulid/v2"
-	"github.com/segmentio/ksuid"
+	"github.com/hashicorp/go-secure-stdlib/base62"
+	"github.com/hashicorp/go-uuid"
 )
 
 const defaultLength = 16
 
-var defaultRander = rand.Reader
+var (
+	base64Encoder = base64.RawURLEncoding
+	base32Encoder = base32.StdEncoding.WithPadding(base32.NoPadding)
+)
 
 // New creates a new random []byte or panics.
 func New() []byte {
-	return must(NewRandom())
+	return must(GenerateRandomBytes())
 }
 
 // NewBase64 creates a new random []byte and returns it as a base64 string or panics.
 func NewBase64() string {
-	return base64.URLEncoding.EncodeToString(must(NewRandom()))
+	return base64Encoder.EncodeToString(must(GenerateRandomBytes()))
+}
+
+// NewBase62 creates a new random []byte and returns it as a base62 string or panics.
+func NewBase62() string {
+	return base62.MustRandom(defaultLength)
 }
 
 // NewBase32 creates a new random []byte and returns it as a base32 string or panics.
 func NewBase32() string {
-	return base32.StdEncoding.EncodeToString(must(NewRandom()))
+	return base32Encoder.EncodeToString(must(GenerateRandomBytes()))
 }
 
 // NewHex creates a new random []byte and returns it as a hex string or panics.
 func NewHex() string {
-	return hex.EncodeToString(must(NewRandom()))
-}
-
-// NewKSUID creates a new random []byte and returns it as a KSUID string or panics.
-// https://github.com/segmentio/ksuid
-func NewKSUID() string {
-	return ksuid.New().String()
-}
-
-// NewULID creates a new random []byte and returns it as a ULID string or panics.
-// https://github.com/oklog/ulid
-func NewULID() string {
-	return ulid.Make().String()
-}
-
-// NewRandom returns a random []byte.
-// The strength of the []bytes is based on the strength of the crypto/rand package.
-func NewRandom() ([]byte, error) {
-	return NewRandomFromReader(defaultRander, defaultLength)
+	return hex.EncodeToString(must(GenerateRandomBytes()))
 }
 
 // NewWithLength creates a new random []byte or panics.
 func NewWithLength(length int) []byte {
-	return must(NewRandomWithLength(length))
+	return must(uuid.GenerateRandomBytes(length))
 }
 
 // NewBase64WithLength creates a new random []byte and returns it as a base64 string or panics.
 func NewBase64WithLength(length int) string {
-	return base64.URLEncoding.EncodeToString(must(NewRandomWithLength(length)))
+	return base64Encoder.EncodeToString(must(uuid.GenerateRandomBytes(length)))
+}
+
+// NewBase62WithLength creates a new random []byte and returns it as a base62 string or panics.
+func NewBase62WithLength(length int) string {
+	return base62.MustRandom(length)
 }
 
 // NewBase32WithLength creates a new random []byte and returns it as a base32 string or panics.
 func NewBase32WithLength(length int) string {
-	return base32.StdEncoding.EncodeToString(must(NewRandomWithLength(length)))
+	return base32Encoder.EncodeToString(must(uuid.GenerateRandomBytes(length)))
 }
 
 // NewHexWithLength creates a new random []byte and returns it as a hex string or panics.
 func NewHexWithLength(length int) string {
-	return hex.EncodeToString(must(NewRandomWithLength(length)))
+	return hex.EncodeToString(must(uuid.GenerateRandomBytes(length)))
 }
 
-// NewRandomWithLength returns a random []byte.
-// The strength of the []bytes is based on the strength of the crypto/rand package.
-func NewRandomWithLength(length int) ([]byte, error) {
-	return NewRandomFromReader(defaultRander, length)
+// GenerateRandomBytes returns a random []byte.
+func GenerateRandomBytes() ([]byte, error) {
+	return uuid.GenerateRandomBytes(defaultLength)
 }
 
-// NewRandomFromReader returns a []byte based on bytes read from a given io.Reader.
-func NewRandomFromReader(reader io.Reader, length int) ([]byte, error) {
-	bytes := make([]byte, length)
-	_, err := io.ReadFull(reader, bytes[:])
-	return bytes, err
-}
-
-func must(bytes []byte, err error) []byte {
+func must[T any](value T, err error) T {
 	if err != nil {
 		panic(err)
 	}
-	return bytes
+	return value
 }
