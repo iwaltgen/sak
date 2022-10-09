@@ -4,7 +4,6 @@ go 1.19
 
 require (
 	github.com/fatih/color v1.13.0
-	github.com/go-git/go-git/v5 v5.4.2
 	github.com/golangci/golangci-lint v1.49.0
 	github.com/hashicorp/go-uuid v1.0.2
 	github.com/iwaltgen/magex v0.7.4
@@ -62,6 +61,7 @@ require (
 	github.com/go-critic/go-critic v0.6.4 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
 	github.com/go-git/go-billy/v5 v5.3.1 // indirect
+	github.com/go-git/go-git/v5 v5.4.2 // indirect
 	github.com/go-toolsmith/astcast v1.0.0 // indirect
 	github.com/go-toolsmith/astcopy v1.0.1 // indirect
 	github.com/go-toolsmith/astequal v1.0.2 // indirect

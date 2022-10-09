@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/go-git/go-git/v5/config"
 	"github.com/iwaltgen/magex/dep"
 	"github.com/iwaltgen/magex/git"
 	"github.com/iwaltgen/magex/script"
@@ -23,11 +22,7 @@ const (
 	targetDir   = "build"
 )
 
-type (
-	BUILD   mg.Namespace
-	RELEASE mg.Namespace
-	TEST    mg.Namespace
-)
+type BUILD mg.Namespace
 
 var (
 	started   int64
@@ -100,7 +95,7 @@ func (ns BUILD) buildEnv() map[string]string {
 		"CGO_ENABLED": "0",
 		"PACKAGE":     packageName,
 		"WORKSPACE":   workspace,
-		"VERSION":     mustCurrentVersion(),
+		"VERSION":     ns.mustCurrentVersion(),
 		"COMMIT_HASH": ns.commitHash(),
 		"BUILD_DATE":  fmt.Sprintf("%d", started),
 	}
@@ -124,18 +119,7 @@ func (BUILD) commitHash() string {
 	return ref.Hash().String()
 }
 
-// Show current version
-func Version() error {
-	version, err := semver.LatestTag(".")
-	if err != nil {
-		return err
-	}
-
-	color.Green("version: %s", version)
-	return nil
-}
-
-func mustCurrentVersion() string {
+func (BUILD) mustCurrentVersion() string {
 	if tag := os.Getenv("GITHUB_TAG"); tag != "" {
 		return tag
 	}
@@ -147,86 +131,40 @@ func mustCurrentVersion() string {
 	return version
 }
 
-// Create tag(release) patch version
-func Release() error {
-	return RELEASE{}.Patch()
-}
-
-// Create tag(release) major version
-func (ns RELEASE) Major() error {
-	return ns.bump(semver.Major)
-}
-
-// Create tag(release) minor version
-func (ns RELEASE) Minor() error {
-	return ns.bump(semver.Minor)
-}
-
-// Create tag(release) patch version
-func (ns RELEASE) Patch() error {
-	return ns.bump(semver.Patch)
-}
-
-func (ns RELEASE) bump(typ semver.BumpType) error {
-	currentVersion := mustCurrentVersion()
-	nextVersion, err := semver.Bump(currentVersion, typ)
+// Show current version
+func Version() error {
+	version, err := semver.LatestTag(".")
 	if err != nil {
 		return err
 	}
 
-	return ns.release(currentVersion, nextVersion)
+	color.Green("version: %s", version)
+	return nil
 }
 
-func (ns RELEASE) release(cv, nv string) error {
-	err := git.CreateTag(nv,
+// Release tag version [major, minor, patch]
+func Release(div string) error {
+	cv, err := semver.LatestTag(".")
+	if err != nil {
+		return err
+	}
+
+	nv, err := semver.Bump(cv, semver.ParseBumpType(div))
+	if err != nil {
+		return err
+	}
+
+	err = git.CreateTag(nv,
 		git.WithCreateTagMessage("release "+nv),
 		git.WithCreateTagPushProgress(os.Stdout),
-		git.WithCreateTagHook(ns.prepareCreateTag(cv, nv)),
 	)
 	if err == nil {
-		color.Green("create tag: %s", nv)
+		color.Green(nv)
 	}
 	return err
 }
 
-func (RELEASE) prepareCreateTag(cv, nv string) func(*git.Repository) error {
-	return func(repo *git.Repository) error {
-		files := []string{"README.md"}
-
-		worktree, err := repo.Worktree()
-		if err != nil {
-			return fmt.Errorf("failed to repository worktree: %w", err)
-		}
-
-		cvn, nvn := cv[1:], nv[1:]
-		for _, file := range files {
-			if _, err := script.ReadFile(file).Replace(cvn, nvn).WriteFile(file); err != nil {
-				return fmt.Errorf("failed to bump version `%s`: %w", file, err)
-			}
-
-			if _, err := worktree.Add(file); err != nil {
-				return fmt.Errorf("failed to git add command `%s`: %w", file, err)
-			}
-		}
-
-		hash, err := worktree.Commit("chore: bump version", &git.CommitOptions{})
-		if err != nil {
-			return fmt.Errorf("failed to repository worktree: %w", err)
-		}
-
-		opt := &git.PushOptions{
-			RefSpecs: []config.RefSpec{
-				config.RefSpec("refs/heads/main:refs/heads/main"),
-			},
-		}
-		if err := repo.Push(opt); err == nil {
-			color.Green("create tag preprocessing: %s [%s]", nv, hash.String())
-		}
-		return err
-	}
-}
-
-// Install tools
+// Run install dependency tool
 func Setup() error {
 	defer spinner.Start(100 * time.Millisecond)()
 
