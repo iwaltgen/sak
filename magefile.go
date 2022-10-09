@@ -138,7 +138,7 @@ func Version() error {
 		return err
 	}
 
-	color.Green("version: %s", version)
+	color.Green(version)
 	return nil
 }
 
