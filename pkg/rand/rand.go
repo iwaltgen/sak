@@ -10,8 +10,8 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 
-	"github.com/hashicorp/go-secure-stdlib/base62"
 	"github.com/hashicorp/go-uuid"
+	"github.com/jxskiss/base62"
 )
 
 const defaultLength = 16
@@ -33,7 +33,7 @@ func NewBase64() string {
 
 // NewBase62 creates a new random []byte and returns it as a base62 string or panics.
 func NewBase62() string {
-	return base62.MustRandom(defaultLength)
+	return base62.EncodeToString(must(GenerateRandomBytes()))
 }
 
 // NewBase32 creates a new random []byte and returns it as a base32 string or panics.
@@ -58,7 +58,7 @@ func NewBase64WithLength(length int) string {
 
 // NewBase62WithLength creates a new random []byte and returns it as a base62 string or panics.
 func NewBase62WithLength(length int) string {
-	return base62.MustRandom(length)
+	return base62.EncodeToString(must(uuid.GenerateRandomBytes(length)))
 }
 
 // NewBase32WithLength creates a new random []byte and returns it as a base32 string or panics.

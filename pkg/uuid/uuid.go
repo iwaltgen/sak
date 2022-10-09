@@ -9,8 +9,8 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 
-	"github.com/hashicorp/go-secure-stdlib/base62"
 	"github.com/hashicorp/go-uuid"
+	"github.com/jxskiss/base62"
 	"github.com/oklog/ulid/v2"
 	"github.com/segmentio/ksuid"
 )
@@ -29,7 +29,7 @@ func NewBase64() string {
 
 // NewBase62 creates a new random []byte and returns it as a base62 string or panics.
 func NewBase62() string {
-	return base62.MustRandom(uuidLen)
+	return base62.EncodeToString(must(uuid.GenerateRandomBytes(uuidLen)))
 }
 
 // NewHex creates a new random []byte and returns it as a hex string or panics.

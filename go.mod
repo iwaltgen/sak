@@ -6,9 +6,9 @@ require (
 	github.com/fatih/color v1.13.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/golangci/golangci-lint v1.49.0
-	github.com/hashicorp/go-secure-stdlib/base62 v0.1.2
 	github.com/hashicorp/go-uuid v1.0.2
 	github.com/iwaltgen/magex v0.7.4
+	github.com/jxskiss/base62 v1.1.0
 	github.com/magefile/mage v1.14.0
 	github.com/mfridman/tparse v0.11.1
 	github.com/oklog/ulid/v2 v2.1.0
