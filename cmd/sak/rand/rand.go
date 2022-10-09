@@ -34,6 +34,11 @@ func init() {
 				Usage: "encoding base64",
 			},
 			&cli.BoolFlag{
+				Name:  "base62",
+				Value: false,
+				Usage: "encoding base62",
+			},
+			&cli.BoolFlag{
 				Name:  "base32",
 				Value: false,
 				Usage: "encoding base32",
@@ -42,16 +47,6 @@ func init() {
 				Name:  "hex",
 				Value: false,
 				Usage: "encoding hex",
-			},
-			&cli.BoolFlag{
-				Name:  "ksuid",
-				Value: false,
-				Usage: "engine use KSUID (fixed length: 20byte)",
-			},
-			&cli.BoolFlag{
-				Name:  "ulid",
-				Value: false,
-				Usage: "engine use ULID (fixed length: 16byte)",
 			},
 		},
 	}
@@ -70,11 +65,8 @@ func run(ctx *cli.Context) error {
 	case ctx.Bool("base32"):
 		random = rand.NewBase32WithLength(length)
 
-	case ctx.Bool("ksuid"):
-		random = rand.NewKSUID()
-
-	case ctx.Bool("ulid"):
-		random = rand.NewULID()
+	case ctx.Bool("base62"):
+		random = rand.NewBase62WithLength(length)
 
 	default:
 		random = rand.NewBase64WithLength(length)

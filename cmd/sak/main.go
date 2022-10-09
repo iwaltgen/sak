@@ -13,6 +13,7 @@ import (
 
 	"github.com/iwaltgen/sak/cmd/sak/len"
 	"github.com/iwaltgen/sak/cmd/sak/rand"
+	"github.com/iwaltgen/sak/cmd/sak/uuid"
 	"github.com/iwaltgen/sak/internal"
 )
 
@@ -38,8 +39,9 @@ func main() {
 			return nil
 		},
 		Commands: []*cli.Command{
-			rand.Cmd,
 			len.Cmd,
+			rand.Cmd,
+			uuid.Cmd,
 		},
 	}
 
