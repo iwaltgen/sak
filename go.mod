@@ -12,7 +12,7 @@ require (
 	github.com/mfridman/tparse v0.11.1
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/segmentio/ksuid v1.0.4
-	github.com/urfave/cli/v2 v2.16.3
+	github.com/urfave/cli/v2 v2.19.2
 	golang.org/x/tools v0.1.12
 )
 
