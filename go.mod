@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/fatih/color v1.13.0
 	github.com/golangci/golangci-lint v1.50.0
-	github.com/hashicorp/go-uuid v1.0.2
+	github.com/hashicorp/go-uuid v1.0.3
 	github.com/iwaltgen/magex v0.7.4
 	github.com/jxskiss/base62 v1.1.0
 	github.com/magefile/mage v1.14.0
