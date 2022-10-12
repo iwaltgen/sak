@@ -19,33 +19,38 @@ var Cmd *cli.Command
 func init() {
 	Cmd = &cli.Command{
 		Name:   "uuid",
-		Usage:  "create a new UUID string",
+		Usage:  "create a new UUID string (16 bytes, 36 runes)",
 		Action: run,
 		Flags: []cli.Flag{
 			&cli.BoolFlag{
+				Name:  "xid",
+				Value: false,
+				Usage: "encoding XID (12 bytes, 20 runes)",
+			},
+			&cli.BoolFlag{
 				Name:  "base64",
 				Value: false,
-				Usage: "encoding base64 (16bytes, 22runes)",
+				Usage: "encoding base64 (16 bytes, 22 runes)",
 			},
 			&cli.BoolFlag{
 				Name:  "base62",
 				Value: false,
-				Usage: "encoding base62 (16bytes, 22runes)",
+				Usage: "encoding base62 (16 bytes, 22 runes)",
 			},
 			&cli.BoolFlag{
 				Name:  "ulid",
 				Value: false,
-				Usage: "engine use ULID (16bytes, 26runes)",
+				Usage: "engine use ULID (16 bytes, 26 runes)",
 			},
 			&cli.BoolFlag{
 				Name:  "ksuid",
 				Value: false,
-				Usage: "engine use KSUID (20bytes, 27runes)",
+				Usage: "engine use KSUID (20 bytes, 27 runes)",
 			},
 			&cli.BoolFlag{
 				Name:  "hex",
 				Value: false,
-				Usage: "encoding hex (16bytes, 32runes)",
+				Usage: "encoding hex (16 bytes, 32 runes)",
 			},
 		},
 	}
@@ -54,6 +59,9 @@ func init() {
 func run(ctx *cli.Context) error {
 	var out string
 	switch {
+	case ctx.Bool("xid"):
+		out = uuid.NewXID()
+
 	case ctx.Bool("base64"):
 		out = uuid.NewBase64()
 

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/go-uuid"
 	"github.com/jxskiss/base62"
 	"github.com/oklog/ulid/v2"
+	"github.com/rs/xid"
 	"github.com/segmentio/ksuid"
 )
 
@@ -47,6 +48,12 @@ func NewKSUID() string {
 // https://github.com/oklog/ulid
 func NewULID() string {
 	return ulid.Make().String()
+}
+
+// NewXID creates a new random []byte and returns it as a XID string or panics.
+// https://github.com/rs/xid
+func NewXID() string {
+	return xid.New().String()
 }
 
 func must[T any](value T, err error) T {
