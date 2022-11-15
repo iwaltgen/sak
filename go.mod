@@ -6,7 +6,7 @@ require (
 	github.com/fatih/color v1.13.0
 	github.com/golangci/golangci-lint v1.50.1
 	github.com/hashicorp/go-uuid v1.0.3
-	github.com/iwaltgen/magex v0.7.4
+	github.com/iwaltgen/magex v0.8.0
 	github.com/jxskiss/base62 v1.1.0
 	github.com/magefile/mage v1.14.0
 	github.com/mfridman/tparse v0.11.1
@@ -14,7 +14,7 @@ require (
 	github.com/rs/xid v1.4.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/urfave/cli/v2 v2.23.4
-	golang.org/x/tools v0.2.0
+	golang.org/x/tools v0.3.0
 )
 
 require (
@@ -175,8 +175,8 @@ require (
 	github.com/spf13/viper v1.13.0 // indirect
 	github.com/ssgreg/nlreturn/v2 v2.2.1 // indirect
 	github.com/stbenjam/no-sprintf-host-port v0.1.1 // indirect
-	github.com/stretchr/objx v0.4.0 // indirect
-	github.com/stretchr/testify v1.8.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
+	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/subosito/gotenv v1.4.1 // indirect
 	github.com/tdakkota/asciicheck v0.1.1 // indirect
 	github.com/tetafro/godot v1.4.11 // indirect
@@ -198,10 +198,10 @@ require (
 	golang.org/x/crypto v0.1.0 // indirect
 	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
 	golang.org/x/exp/typeparams v0.0.0-20220827204233-334a2380cb91 // indirect
-	golang.org/x/mod v0.6.0 // indirect
-	golang.org/x/net v0.1.0 // indirect
-	golang.org/x/sync v0.0.0-20220819030929-7fc1605a5dde // indirect
-	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/mod v0.7.0 // indirect
+	golang.org/x/net v0.2.0 // indirect
+	golang.org/x/sync v0.1.0 // indirect
+	golang.org/x/sys v0.2.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
