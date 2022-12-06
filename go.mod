@@ -13,7 +13,7 @@ require (
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/rs/xid v1.4.0
 	github.com/segmentio/ksuid v1.0.4
-	github.com/urfave/cli/v2 v2.23.5
+	github.com/urfave/cli/v2 v2.23.6
 	golang.org/x/tools v0.3.0
 )
 
