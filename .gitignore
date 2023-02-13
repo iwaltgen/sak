@@ -55,3 +55,6 @@ tmp/**/*
 # direnv
 .envrc
 .direnv
+
+# asdf
+.tool-versions
