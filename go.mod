@@ -8,7 +8,7 @@ require (
 	github.com/hashicorp/go-uuid v1.0.3
 	github.com/iwaltgen/magex v0.8.5
 	github.com/jxskiss/base62 v1.1.0
-	github.com/magefile/mage v1.14.0
+	github.com/magefile/mage v1.15.0
 	github.com/mfridman/tparse v0.12.1
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/rs/xid v1.5.0
