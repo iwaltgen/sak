@@ -9,7 +9,7 @@ require (
 	github.com/iwaltgen/magex v0.8.5
 	github.com/jxskiss/base62 v1.1.0
 	github.com/magefile/mage v1.15.0
-	github.com/mfridman/tparse v0.12.2
+	github.com/mfridman/tparse v0.13.1
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/rs/xid v1.5.0
 	github.com/segmentio/ksuid v1.0.4
