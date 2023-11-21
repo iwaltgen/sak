@@ -9,7 +9,7 @@ require (
 	github.com/iwaltgen/magex v0.9.0
 	github.com/jxskiss/base62 v1.1.0
 	github.com/magefile/mage v1.15.0
-	github.com/mfridman/tparse v0.13.1
+	github.com/mfridman/tparse v0.13.2
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/rs/xid v1.5.0
 	github.com/segmentio/ksuid v1.0.4
@@ -143,7 +143,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/moricho/tparallel v0.3.1 // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
-	github.com/muesli/termenv v0.15.1 // indirect
+	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/nakabonne/nestif v0.3.1 // indirect
 	github.com/nishanths/exhaustive v0.11.0 // indirect
 	github.com/nishanths/predeclared v0.2.2 // indirect
