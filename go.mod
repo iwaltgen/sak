@@ -3,7 +3,7 @@ module github.com/iwaltgen/sak
 go 1.22.0
 
 require (
-	github.com/fatih/color v1.16.0
+	github.com/fatih/color v1.17.0
 	github.com/golangci/golangci-lint v1.58.1
 	github.com/hashicorp/go-uuid v1.0.3
 	github.com/iwaltgen/magex v0.10.0
