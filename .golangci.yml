@@ -1,7 +1,9 @@
 run:
   timeout: 10m
   tests: false
-  skip-dirs:
+
+issues:
+  exclude-dirs:
   - bin
   - build
   - tools
