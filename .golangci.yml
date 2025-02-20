@@ -6,4 +6,3 @@ issues:
   exclude-dirs:
   - bin
   - build
-  - tools

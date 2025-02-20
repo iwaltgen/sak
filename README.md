@@ -8,3 +8,12 @@
 [![License](https://img.shields.io/github/license/iwaltgen/sak)](https://github.com/iwaltgen/sak/blob/main/LICENSE)
 
 a minimal multi-tool CLI.
+
+## development
+
+```bash
+go mod tidy
+go install tool
+
+mage test build
+```
